@@ -1,5 +1,6 @@
 -- No need of this config block any more 
--- since we configd this table materialization in dbt_project.yml
+-- because of the changes made in dbt_project.yml that has more meta level configs across the entire project
+-- since we configd this table materialization in dbt_project.yml "materialized: table"
 --{{ config(materialized="table")}}
 
 with customers as (
@@ -36,7 +37,7 @@ final as (
         customer_orders.first_order_date,
         customer_orders.most_recent_order_date,
         coalesce(customer_orders.number_of_orders, 0) as number_of_orders,
-        coalesce(customer_orders.lifetime_value,0) as lifetime_value
+        coalesce(customer_orders.lifetime_value, 0) as lifetime_value
 
     from customers
 
